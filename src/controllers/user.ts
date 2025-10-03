@@ -87,3 +87,35 @@ export const logout = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Logout failed", details: error.message });
   }
 };
+
+export const updateUser = async (req: Request, res: Response) => {
+  const { email, role, skills = [] } = req.body;
+  try {
+    if (req.user?.role !== "admin") {
+      return res.status(403).json({ error: "Forbidden" });
+    }
+
+    const user = (await User.findOne({ email })) as IUser | null;
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    await User.updateOne(
+      { _id: user._id },
+      { email, role, skills: skills.length ? skills : user.skills },
+    );
+    res.status(200).json({ message: "User updated successfully" });
+  } catch (error) {}
+};
+
+export const getUser = async (req: Request, res: Response) => {
+  try {
+    if (req.user?.role !== "admin") {
+      return res.status(403).json({ error: "Forbidden" });
+    }
+
+    const users = await User.find().select("-password");
+
+    res.status(200).json(users);
+  } catch (error) {}
+};
