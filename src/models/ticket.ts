@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+import type { ITimestamp } from "../types/timestamp";
 
-export interface ITicket {
+export interface ITicket extends mongoose.Document, ITimestamp {
   title: string;
   description: string;
   status: string;

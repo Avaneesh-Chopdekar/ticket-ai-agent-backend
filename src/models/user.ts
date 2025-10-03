@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+import type { ITimestamp } from "../types/timestamp";
 
-export interface IUser {
+export interface IUser extends mongoose.Document, ITimestamp {
   email: string;
   password: string;
   role: string;
