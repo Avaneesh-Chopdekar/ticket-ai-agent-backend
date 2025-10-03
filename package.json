@@ -5,7 +5,8 @@
   "scripts": {
     "tsc": "tsc",
     "start": "node dist/index.js",
-    "dev": "nodemon --watch src --exec 'npm run tsc && npm run start'"
+    "dev": "nodemon --watch src --exec 'npm run tsc && npm run start'",
+    "inngest-dev": "npx inngest-cli@latest dev"
   },
   "license": "MIT",
   "packageManager": "pnpm@10.17.1",
