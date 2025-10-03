@@ -1,6 +1,18 @@
 import mongoose from "mongoose";
 
-const TicketSchema = new mongoose.Schema(
+export interface ITicket {
+  title: string;
+  description: string;
+  status: string;
+  createdBy: mongoose.Types.ObjectId;
+  assignedTo: mongoose.Types.ObjectId | null;
+  priority: string;
+  deadline: Date | null;
+  helpfulNotes: string | null;
+  relatedSkills: string[];
+}
+
+const TicketSchema = new mongoose.Schema<ITicket>(
   {
     title: {
       type: String,
